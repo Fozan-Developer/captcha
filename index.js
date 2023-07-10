@@ -29,7 +29,8 @@ class Captcha {
 
     return {
       id: captchaId,
-      options: captchaOptions
+      answer: captchaSmiley,
+      variations: captchaOptions
     };
   }
 
