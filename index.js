@@ -2,14 +2,21 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
+const smiles = require('./smiles.js');
+
 class Captcha {
-  constructor() {
+  constructor(argument) {
     this.captchas = {};
-    this.smileys = ['😀', '😊', '🥳', '😎', '🤩', '😇', '😍', '🤗', '😄', '🙂', '🤪', '👾', '🤖', '👻', '👀', '🎩', '🎓', '🐶', '🦊', '🐯', '🐸', '🐒', '🐣', '🐱', '🐻', '🦁', '🐵', '🐔', '🐥', '🦉', '🦅', '🐴', '🐛', '🦄', '🦋', '🕷', '🕸', '🐭', '🐼', '🐮', '🐧', '🐻‍❄️', '🐷', '🐦', '🦆', '🐺', '🐝', '🐰', '🐨', '🐽', '🙊', '🐤', '🐳', '🌟', '✨', '💥', '🔥', '💫', '☂️', '🍏', '🍓', '🍋', '🍊', '🍇', '🍩', '🍫', '🍬', '🍿', '😀', '😊', '🥳', '😎', '🤩', '😇', '😍', '🤗', '😄', '🙂', '🤪', '👾', '🤖', '👻', '👀', '🎩', '🎓', '🐶', '🦊', '🐯', '🐸', '🐒', '🐣', '🐱', '🐻', '🦁', '🐵', '🐔', '🐥', '🦉', '🦅', '🐴', '🐛', '🦄', '🦋', '🪰', '🕷', '🕸', '🐭', '🐼', '🐮', '🐧', '🐻‍❄️', '🐷', '🐦', '🦆', '🐺', '🐝', '🐰', '🐨', '🐽', '🙊', '🐤', '🐳', '🌟', '✨', '💥', '🔥', '💫', '☂️', '🍏', '🍓', '🍋', '🍊', '🍇', '🍩', '🍫', '🍬', '🍿'];
-    this.rowCount = 2;
-    this.columnCount = 3;
+    this.smileys = smiles;
+    // this.rowCount = 2;
+    // this.columnCount = 3;
+    this.variations = argument.variations != undefined ? argument.variations : 3;
     this.captchaFile = path.join(__dirname, './captchas.json');
     this.loadCaptchasFromFile();
+
+    if(typeof this.variations != "number") throw Error("The variation field must be a number");
+    if(this.variations < 3) throw Error("There can be no less than 3 variations");
+    if(this.variations > 9) throw Error("There can be no more than 9 variations");
   }
 
   generateCaptcha() {
@@ -57,7 +64,7 @@ class Captcha {
     const options = [correctAnswer];
     const usedIndexes = [this.smileys.indexOf(correctAnswer)];
 
-    while (options.length < this.rowCount * this.columnCount) {
+    while (options.length < this.variations) {
       const randomIndex = Math.floor(Math.random() * this.smileys.length);
 
       if (!usedIndexes.includes(randomIndex)) {
