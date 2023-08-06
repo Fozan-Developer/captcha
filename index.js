@@ -19,7 +19,7 @@ class Captcha {
     if(this.variations > 9) throw Error("There can be no more than 9 variations");
   }
 
-  generateCaptcha() {
+  generate() {
     const captchaSmiley = this.getRandomSmiley();
     const captchaOptions = this.generateRandomOptions(captchaSmiley);
     const captchaId = this.generateRandomId();
@@ -34,7 +34,7 @@ class Captcha {
     };
   }
 
-  verifyCaptcha(id, userInput) {
+  verify(id, userInput) {
     const captchaSmiley = this.captchas[id];
 
     if (!captchaSmiley) {
