@@ -28,7 +28,7 @@ const captcha = require('@mr_fozan/captcha');
 
 ## 📖  Documentation
 
-## Creating a captcha**
+## Creating a captcha
 
 ```js
 const captcha = require('@mr_fozan/captcha');
