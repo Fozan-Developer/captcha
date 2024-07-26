@@ -1,76 +1,98 @@
-<h1 align="center">🛂 Captcha</h1>
+# 🛂 Captcha
 
-<div align="center">
+[![npm package](https://img.shields.io/npm/v/@mr_fozan/captcha?logo=npm&style=flat-square)](https://www.npmjs.org/package/@mr_fozan/captcha)
 
-[![npm package](https://img.shields.io/npm/v/@mr_fozan/utils.js?logo=npm&style=flat-square)](https://www.npmjs.org/package/@mr_fozan/utils.js)
+**Captcha** is a Node.js module that allows you to create and manage captcha sessions efficiently.
 
-**Captcha is a [Node.js](https://npmjs.com) module that will allow you to create a captcha session**
+## 🚀 Quick Start
 
-</div>
+Here's a quick example of how to get started with the Captcha library:
 
-## 📦 Install
+![CodeSnap](https://github.com/Fozan-Developer/captcha/blob/main/assets/codeSnap.png)
 
-**NPM**
+```js
+const Captcha = require('@mr_fozan/captcha');
+
+// Create a new captcha instance with the desired number of variations
+const captcha = new Captcha({ variations: 3 });
+
+// Generate a new captcha
+captcha.generate().then(result => {
+  console.log('Generated Captcha:', result);
+
+  // Example of verifying user input
+  const isValid = captcha.verify(result.id, result.answer);
+  console.log('Captcha verification result:', isValid);
+}).catch(err => {
+  console.error('Error generating captcha:', err);
+});
+```
+
+### 📦 Installation
+
+**Using NPM:**
+
 ```sh
-npm instal @mr_fozan/captcha
+npm install @mr_fozan/captcha
 ```
-**YARN**
+
+**Using Yarn:**
 
 ```sh
-$ yarn add @mr_fozan/captcha
+yarn add @mr_fozan/captcha
 ```
 
-## 🚀 Usage
+## 📖 Documentation
+
+### Creating a Captcha
 
 ```js
-const captcha = require('@mr_fozan/captcha');
+const Captcha = require('@mr_fozan/captcha');
+
+// Create a new captcha instance with the desired number of variations
+const captcha = new Captcha({ variations: 3 });
+
+// Generate a new captcha
+const result = await captcha.generate();
+console.log(result);
 ```
 
-## 📖  Documentation
+**Response Structure:**
 
-## Creating a captcha
+- `id`: Unique identifier for the captcha
+- `answer`: The correct answer for the captcha
+- `variations`: Array of answer options, including the correct one
+
+### Verifying Captcha Input
 
 ```js
-const captcha = require('@mr_fozan/captcha');
-const cpt = new captcha({ variations: 3 });
+const Captcha = require('@mr_fozan/captcha');
 
-const generate = cpt.generate();
-console.log(generate);
+// Create a new captcha instance
+const captcha = new Captcha({ variations: 3 });
+
+// The captcha ID and user input to verify
+const captchaId = '001'; // Use the actual ID from the generated captcha
+const userInput = '🍫';  // User's input for verification
+
+// Verify the user's input
+const result = captcha.verify(captchaId, userInput);
+console.log(result);
 ```
 
-**The request will return the following data**
-* id - captcha id
-* answer - correct captcha answer
-* variations - list of answer options (one of them is correct)
+**Verification Parameters:**
 
-## Checking captcha input
+- `id`: Unique identifier for the captcha
+- `userInput`: The response provided by the user
 
-```js
-const captcha = require('@mr_fozan/captcha');
-const cpt = new captcha({ variations: 3 });
+**Verification Response:**
 
-var captchaId = 001;
-var userInput = "🍫";
-
-const verify = cpt.verify(captchaId, userInput);
-console.log(verify);
-```
-
-**The data that is needed in the argument**
-* id - captcha id
-* answer - user response
-
-**The request will return the following data**
-* response - Boolean (If the captcha is correct, then true, if not, then false)
+- `response`: Boolean indicating whether the captcha is correct (`true` or `false`)
 
 ## 👥 Contributors
 
-<p align="center">
-  <a href="https://github.com/Fozan-Developer/utils.js/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=Fozan-Developer/utils.js" />
-  </a>
-</p>
+[![Contributors](https://contrib.rocks/image?repo=Fozan-Developer/captcha)](https://github.com/Fozan-Developer/captcha/graphs/contributors)
 
 ## License
 
-**The MIT License (MIT)**
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
