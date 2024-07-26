@@ -1,12 +1,16 @@
 {
   "name": "@mr_fozan/captcha",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.2",
+  "description": "A Node.js module to create and manage captcha sessions.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "captcha",
+    "nodejs",
+    "authentication"
+  ],
   "author": "mr_fozan",
   "license": "ISC",
   "dependencies": {
@@ -14,5 +18,10 @@
     "crypto": "^1.0.1",
     "fs": "^0.0.1-security",
     "path": "^0.12.7"
+  },
+  "homepage": "https://github.com/Fozan-Developer/captcha",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fozan-Developer/captcha.git"
   }
 }
